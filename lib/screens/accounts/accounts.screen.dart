@@ -4,8 +4,8 @@ import 'package:fintracker/global_event.dart';
 import 'package:fintracker/helpers/currency.helper.dart';
 import 'package:fintracker/model/account.model.dart';
 import 'package:fintracker/theme/colors.dart';
-import 'package:fintracker/widgets/modals/account_form.dialog.dart';
-import 'package:fintracker/widgets/modals/confirm.modal.dart';
+import 'package:fintracker/widgets/dialog/account_form.dialog.dart';
+import 'package:fintracker/widgets/dialog/confirm.modal.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
