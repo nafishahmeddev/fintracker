@@ -50,6 +50,15 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: AppBar(
+          leading: IconButton(
+            icon: const Icon(Icons.menu),
+            onPressed: (){
+              Scaffold.of(context).openDrawer();
+            },
+          ),
+          title: const Text("Categories", style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18),),
+        ),
         body: ListView.builder(
           padding: const EdgeInsets.symmetric(vertical: 15),
             itemCount: _categories.length,

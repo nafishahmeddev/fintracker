@@ -12,7 +12,6 @@ class MainScreen extends StatefulWidget{
 
 class _MainScreenState extends State<MainScreen>{
   final PageController _controller = PageController(keepPage: true);
-  final List<String> titles = ["Home", "Accounts", "Categories"];
   int _selected = 0;
 
   @override
@@ -22,17 +21,13 @@ class _MainScreenState extends State<MainScreen>{
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
-      appBar: AppBar(
-        title: Text(titles[_selected], style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 18),),
-      ),
       body: PageView(
         controller: _controller,
         physics: const NeverScrollableScrollPhysics(),
         children: const [
           HomeScreen(),
           AccountsScreen(),
-          CategoriesScreen(),
-          SettingsScreen()
+          CategoriesScreen()
         ],
         onPageChanged: (int index){
           setState(() {

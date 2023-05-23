@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 maskAccount(String value, [int lastLength = 4]){
+  if(value.length <4 ) return value;
   int length = value.length - lastLength;
   String generated = "";
   if(length > 0){
@@ -62,6 +63,15 @@ class _AccountsScreenState extends State<AccountsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: AppBar(
+          leading: IconButton(
+            icon: const Icon(Icons.menu),
+            onPressed: (){
+              Scaffold.of(context).openDrawer();
+            },
+          ),
+          title: const Text("Accounts", style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18),),
+        ),
         body: ListView.builder(
             padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
             itemCount: _accounts.length,

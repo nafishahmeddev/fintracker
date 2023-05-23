@@ -10,6 +10,7 @@ import 'package:fintracker/screens/home/widgets/account_slider.dart';
 import 'package:fintracker/screens/home/widgets/transact_list_item.dart';
 import 'package:fintracker/screens/transaction_form.screen.dart';
 import 'package:fintracker/theme/colors.dart';
+import 'package:fintracker/widgets/drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
@@ -124,6 +125,15 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.menu),
+          onPressed: (){
+            Scaffold.of(context).openDrawer();
+          },
+        ),
+        title: const Text("Home", style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18),),
+      ),
       body: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
