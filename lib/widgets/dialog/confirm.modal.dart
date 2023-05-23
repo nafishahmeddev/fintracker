@@ -18,6 +18,7 @@ class ConfirmModal extends StatelessWidget{
   Widget build(BuildContext context) {
     return AlertDialog(
       title: Text(title, style: const TextStyle(fontWeight: FontWeight.w600),),
+      insetPadding: const EdgeInsets.all(20),
       content: content,
       actions: [
         Row(
@@ -26,7 +27,7 @@ class ConfirmModal extends StatelessWidget{
                 child: AppButton(
                     label: "No",
                     onPressed: onCancel,
-                    color: ThemeColors.primary,
+                    color: Theme.of(context).colorScheme.primary,
                     type: AppButtonType.outlined
                 )
             ),

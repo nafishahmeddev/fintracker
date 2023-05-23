@@ -103,7 +103,7 @@ class _AccountsScreenState extends State<AccountsScreen> {
                                       const Text.rich(
                                           TextSpan(
                                               children: [
-                                                TextSpan(text: "▼", style: TextStyle(color: ThemeColors.success)),
+                                                //TextSpan(text: "▼", style: TextStyle(color: ThemeColors.success)),
                                                 TextSpan(text:"Income", style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600)),
                                               ]
                                           )
@@ -119,7 +119,7 @@ class _AccountsScreenState extends State<AccountsScreen> {
                                       const Text.rich(
                                           TextSpan(
                                               children: [
-                                                TextSpan(text: "▲", style: TextStyle(color: ThemeColors.error)),
+                                                //TextSpan(text: "▲", style: TextStyle(color: ThemeColors.error)),
                                                 TextSpan(text:"Expense", style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600)),
                                               ]
                                           )

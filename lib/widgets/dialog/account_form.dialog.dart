@@ -61,7 +61,7 @@ class _AccountForm extends State<AccountForm>{
     return AlertDialog(
       title: Text(widget.account!=null?"Edit Account":"New Account", style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w600),),
       scrollable: true,
-      insetPadding: const EdgeInsets.symmetric(horizontal: 10),
+      insetPadding: const EdgeInsets.all(20),
       content: SizedBox(
           width: MediaQuery.sizeOf(context).width,
           child: Column(

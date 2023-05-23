@@ -1,6 +1,7 @@
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:fintracker/helpers/db.helper.dart';
 import 'package:fintracker/screens//main.screen.dart';
+import 'package:fintracker/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:month_year_picker/month_year_picker.dart';
@@ -25,7 +26,7 @@ class App extends StatelessWidget {
 
     return DynamicColorBuilder(
         builder: (ColorScheme? lightDynamic, ColorScheme? darkDynamic) {
-          Color? seedColor;//ThemeColors.primary;
+          Color? seedColor = ThemeColors.primary;
           if (lightDynamic != null && darkDynamic != null) {
             seedColor = darkDynamic.primary;
           }

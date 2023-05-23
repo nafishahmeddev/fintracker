@@ -46,7 +46,7 @@ class _CategoryForm extends State<CategoryForm>{
   Widget build(BuildContext context) {
     return  AlertDialog(
       scrollable: true,
-      insetPadding: const EdgeInsets.all(15),
+      insetPadding: const EdgeInsets.all(10),
       title: Text(widget.category!=null?"Edit Category":"New Category", style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w600),),
       content: SizedBox(
         width: MediaQuery.of(context).size.width,
