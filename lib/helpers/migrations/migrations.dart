@@ -35,18 +35,40 @@ void v1(Database database) async {
       "isDefault INTEGER"
       ")");
 
+
   await database.insert("accounts", {
-    "name": "Bank",
+    "name": "Cash",
     "icon": Icons.wallet.codePoint,
     "color": Colors.teal.value,
     "isDefault": 1
   });
 
-  await database.insert("categories", {
-    "name": "Default",
-    "icon": Icons.ac_unit_sharp.codePoint,
-    "color": Colors.amber.value,
-  });
+  //prefill all categories
+  List<Map<String, dynamic>> categories = [
+    {"name": "Housing", "icon": Icons.house.codePoint},
+    {"name": "Transportation", "icon": Icons.emoji_transportation.codePoint},
+    {"name": "Food", "icon": Icons.restaurant.codePoint},
+    {"name": "Utilities", "icon": Icons.category.codePoint},
+    {"name": "Insurance", "icon": Icons.health_and_safety.codePoint},
+    {"name": "Medical & Healthcare", "icon": Icons.medical_information.codePoint},
+    {"name": "Saving, Investing, & Debt Payments", "icon": Icons.attach_money.codePoint},
+    {"name": "Personal Spending", "icon": Icons.house.codePoint},
+    {"name": "Personal Spending", "icon": Icons.person.codePoint},
+    {"name": "Recreation & Entertainment", "icon": Icons.tv.codePoint},
+    {"name": "Miscellaneous", "icon": Icons.library_books_sharp.codePoint},
+  ];
+
+  int index = 0;
+  for(Map<String, dynamic> category in categories){
+    await database.insert("categories", {
+      "name": category["name"],
+      "icon": category["icon"],
+      "color": Colors.primaries[index].value,
+    });
+    index++;
+  }
+
+
 
 }
 
