@@ -13,7 +13,7 @@ class TransactionListItem extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    bool isCredit = transaction.type == TransactionType.CREDIT ;
+    bool isCredit = transaction.type == TransactionType.credit ;
     return ListTile(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(25)

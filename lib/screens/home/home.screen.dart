@@ -76,8 +76,8 @@ class _HomeScreenState extends State<HomeScreen> {
     double income = 0;
     double expense = 0;
     for (var transaction in trans) {
-      if(transaction.type == TransactionType.CREDIT) income += transaction.amount;
-      if(transaction.type == TransactionType.DEBIT) expense += transaction.amount;
+      if(transaction.type == TransactionType.credit) income += transaction.amount;
+      if(transaction.type == TransactionType.debit) expense += transaction.amount;
     }
 
     //fetch accounts
@@ -256,7 +256,7 @@ class _HomeScreenState extends State<HomeScreen> {
           )
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: ()=> openAddTransactionPage(TransactionType.CREDIT),
+        onPressed: ()=> openAddTransactionPage(TransactionType.credit),
         child: const Icon(Icons.add),
       ),
     );

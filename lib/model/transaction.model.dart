@@ -3,8 +3,8 @@ import 'package:fintracker/model/category.model.dart';
 import 'package:intl/intl.dart';
 
 enum TransactionType {
-  DEBIT,
-  CREDIT
+  debit,
+  credit
 }
 class Transaction {
   int? id;
@@ -36,8 +36,8 @@ class Transaction {
       account: Account.fromJson(data["account"]),
       category: Category.fromJson(data["category"]),
       amount: data["amount"],
-      type: data["type"] == "CR" ? TransactionType.CREDIT : TransactionType
-          .DEBIT,
+      type: data["type"] == "CR" ? TransactionType.credit : TransactionType
+          .debit,
       datetime: DateTime.parse(data["datetime"]),
     );
   }
@@ -50,6 +50,6 @@ class Transaction {
     "category": category.id,
     "amount": amount,
     "datetime": DateFormat('yyyy-MM-dd kk:mm:ss').format(datetime),
-    "type": type == TransactionType.CREDIT ? "CR": "DR",
+    "type": type == TransactionType.credit ? "CR": "DR",
   };
 }

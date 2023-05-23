@@ -48,7 +48,7 @@ class _TransactionForm extends State<TransactionForm>{
   Account? _account;
   Category? _category;
   double _amount=0;
-  TransactionType _type= TransactionType.CREDIT;
+  TransactionType _type= TransactionType.credit;
   DateTime _datetime = DateTime.now();
 
   loadAccounts(){
@@ -217,23 +217,23 @@ class _TransactionForm extends State<TransactionForm>{
                                     AppButton(
                                       onPressed: (){
                                         setState(() {
-                                          _type = TransactionType.CREDIT;
+                                          _type = TransactionType.credit;
                                         });
                                       },
                                       label: "Income",
                                       color: Theme.of(context).colorScheme.primary,
-                                      type: _type == TransactionType.CREDIT? AppButtonType.filled: AppButtonType.outlined,
+                                      type: _type == TransactionType.credit? AppButtonType.filled: AppButtonType.outlined,
                                     ),
                                     
                                     AppButton(
                                       onPressed: (){
                                         setState(() {
-                                          _type = TransactionType.DEBIT;
+                                          _type = TransactionType.debit;
                                         });
                                       },
                                       label: "Expense",
                                       color: Theme.of(context).colorScheme.primary,
-                                      type: _type == TransactionType.DEBIT? AppButtonType.filled: AppButtonType.outlined,
+                                      type: _type == TransactionType.debit? AppButtonType.filled: AppButtonType.outlined,
                                     )
                                   ],
                                 )

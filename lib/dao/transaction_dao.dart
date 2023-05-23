@@ -31,7 +31,7 @@ class TransactionDao {
 
     //type check
     if(type != null){
-      where += "AND type='${type == TransactionType.CREDIT?"DR":"CR"}' ";
+      where += "AND type='${type == TransactionType.credit?"DR":"CR"}' ";
     }
 
     //icon check
