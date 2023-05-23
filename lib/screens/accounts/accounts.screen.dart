@@ -9,7 +9,15 @@ import 'package:fintracker/widgets/dialog/confirm.modal.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-
+maskAccount(String value, [int lastLength = 4]){
+  int length = value.length - lastLength;
+  String generated = "";
+  if(length > 0){
+    generated+= value.substring(0, length).split("").map((e) => e==" "? " ": "X").join("");
+  }
+  generated += value.substring(length);
+  return generated;
+}
 class AccountsScreen extends StatefulWidget {
   const AccountsScreen({super.key});
 
@@ -79,7 +87,7 @@ class _AccountsScreenState extends State<AccountsScreen> {
                                 children: [
                                   Text(account.holderName, style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 18),),
                                   Text(account.name, style: Theme.of(context).textTheme.bodySmall,),
-                                  Text(account.accountNumber, style: Theme.of(context).textTheme.bodySmall,),
+                                  Text(maskAccount(account.accountNumber), style: Theme.of(context).textTheme.bodySmall,),
                                 ],
                               )
                             ],

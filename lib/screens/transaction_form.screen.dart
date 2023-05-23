@@ -136,13 +136,21 @@ class _TransactionForm extends State<TransactionForm>{
   }
 
   void handleSaveTransaction(context) async{
-    Transaction transaction = Transaction(id: _id, account: _account!, category: _category!, amount: _amount, type: _type, datetime: _datetime, title: _title, description: _description);
-    await _transactionDao.upsert(transaction);
-    if(widget.onClose != null){
-      widget.onClose!(transaction);
-    }
-    Navigator.of(context).pop();
-    io.emit("transaction_update");
+      Transaction transaction = Transaction(id: _id,
+          account: _account!,
+          category: _category!,
+          amount: _amount,
+          type: _type,
+          datetime: _datetime,
+          title: _title,
+          description: _description
+      );
+      await _transactionDao.upsert(transaction);
+      if (widget.onClose != null) {
+        widget.onClose!(transaction);
+      }
+      Navigator.of(context).pop();
+      io.emit("transaction_update");
   }
 
 
@@ -223,6 +231,7 @@ class _TransactionForm extends State<TransactionForm>{
                                       label: "Income",
                                       color: Theme.of(context).colorScheme.primary,
                                       type: _type == TransactionType.credit? AppButtonType.filled: AppButtonType.outlined,
+                                      borderRadius: BorderRadius.circular(45),
                                     ),
                                     
                                     AppButton(
@@ -234,6 +243,7 @@ class _TransactionForm extends State<TransactionForm>{
                                       label: "Expense",
                                       color: Theme.of(context).colorScheme.primary,
                                       type: _type == TransactionType.debit? AppButtonType.filled: AppButtonType.outlined,
+                                      borderRadius: BorderRadius.circular(45),
                                     )
                                   ],
                                 )
@@ -517,7 +527,7 @@ class _TransactionForm extends State<TransactionForm>{
                                                           color: _category?.id == category.id ? Theme.of(context).colorScheme.primary : Colors.transparent
                                                       )
                                                   ),
-                                                  padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 0),
+                                                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
                                                   elevation: 0,
                                                   focusElevation: 0,
                                                   hoverElevation: 0,
@@ -562,7 +572,7 @@ class _TransactionForm extends State<TransactionForm>{
                   height: 50,
                   labelStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
                   isFullWidth: true,
-                  onPressed: _amount > 0 ? (){
+                  onPressed: _amount > 0 && _account!=null && _category!=null ? (){
                     handleSaveTransaction(context);
                   } : null,
                   color: Theme.of(context).colorScheme.primary,
