@@ -53,7 +53,6 @@ void v1(Database database) async {
     {"name": "Medical & Healthcare", "icon": Icons.medical_information.codePoint},
     {"name": "Saving, Investing, & Debt Payments", "icon": Icons.attach_money.codePoint},
     {"name": "Personal Spending", "icon": Icons.house.codePoint},
-    {"name": "Personal Spending", "icon": Icons.person.codePoint},
     {"name": "Recreation & Entertainment", "icon": Icons.tv.codePoint},
     {"name": "Miscellaneous", "icon": Icons.library_books_sharp.codePoint},
   ];
