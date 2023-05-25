@@ -1,11 +1,11 @@
 import 'package:events_emitter/listener.dart';
 import 'package:fintracker/dao/account_dao.dart';
 import 'package:fintracker/dao/category_dao.dart';
-import 'package:fintracker/dao/transaction_dao.dart';
+import 'package:fintracker/dao/payment_dao.dart';
 import 'package:fintracker/global_event.dart';
 import 'package:fintracker/model/account.model.dart';
 import 'package:fintracker/model/category.model.dart';
-import 'package:fintracker/model/transaction.model.dart';
+import 'package:fintracker/model/payment.model.dart';
 import 'package:fintracker/theme/colors.dart';
 import 'package:fintracker/widgets/dialog/account_form.dialog.dart';
 import 'package:fintracker/widgets/dialog/category_form.dialog.dart';
@@ -16,22 +16,22 @@ import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
-typedef OnCloseCallback = Function(Transaction transaction);
+typedef OnCloseCallback = Function(Payment payment);
 final DateFormat formatter = DateFormat('dd/MM/yyyy hh:mm a');
-class TransactionForm extends StatefulWidget{
-  final TransactionType  type;
-  final Transaction?  transaction;
+class PaymentForm extends StatefulWidget{
+  final PaymentType  type;
+  final Payment?  payment;
   final OnCloseCallback? onClose;
 
-  const TransactionForm({super.key, required this.type, this.transaction, this.onClose});
+  const PaymentForm({super.key, required this.type, this.payment, this.onClose});
 
   @override
-  State<TransactionForm> createState() => _TransactionForm();
+  State<PaymentForm> createState() => _PaymentForm();
 }
 
-class _TransactionForm extends State<TransactionForm>{
+class _PaymentForm extends State<PaymentForm>{
   bool _initialised = false;
-  final TransactionDao _transactionDao = TransactionDao();
+  final PaymentDao _paymentDao = PaymentDao();
   final AccountDao _accountDao = AccountDao();
   final CategoryDao _categoryDao = CategoryDao();
 
@@ -48,7 +48,7 @@ class _TransactionForm extends State<TransactionForm>{
   Account? _account;
   Category? _category;
   double _amount=0;
-  TransactionType _type= TransactionType.credit;
+  PaymentType _type= PaymentType.credit;
   DateTime _datetime = DateTime.now();
 
   loadAccounts(){
@@ -70,16 +70,16 @@ class _TransactionForm extends State<TransactionForm>{
   void populateState() async{
     await loadAccounts();
     await loadCategories();
-    if(widget.transaction != null) {
+    if(widget.payment != null) {
       setState(() {
-        _id = widget.transaction!.id;
-        _title = widget.transaction!.title;
-        _description = widget.transaction!.description;
-        _account = widget.transaction!.account;
-        _category = widget.transaction!.category;
-        _amount = widget.transaction!.amount;
-        _type = widget.transaction!.type;
-        _datetime = widget.transaction!.datetime;
+        _id = widget.payment!.id;
+        _title = widget.payment!.title;
+        _description = widget.payment!.description;
+        _account = widget.payment!.account;
+        _category = widget.payment!.category;
+        _amount = widget.payment!.amount;
+        _type = widget.payment!.type;
+        _datetime = widget.payment!.datetime;
         _initialised = true;
       });
     }
@@ -136,7 +136,7 @@ class _TransactionForm extends State<TransactionForm>{
   }
 
   void handleSaveTransaction(context) async{
-      Transaction transaction = Transaction(id: _id,
+      Payment payment = Payment(id: _id,
           account: _account!,
           category: _category!,
           amount: _amount,
@@ -145,12 +145,12 @@ class _TransactionForm extends State<TransactionForm>{
           title: _title,
           description: _description
       );
-      await _transactionDao.upsert(transaction);
+      await _paymentDao.upsert(payment);
       if (widget.onClose != null) {
-        widget.onClose!(transaction);
+        widget.onClose!(payment);
       }
       Navigator.of(context).pop();
-      io.emit("transaction_update");
+      io.emit("payment_update");
   }
 
 
@@ -186,14 +186,14 @@ class _TransactionForm extends State<TransactionForm>{
     return
       Scaffold(
           appBar: AppBar(
-            title: Text("${widget.transaction ==null? "New": "Edit"} Transaction", style: const TextStyle(fontWeight: FontWeight.w600),),
+            title: Text("${widget.payment ==null? "New": "Edit"} Transaction", style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 18),),
             actions: [
               _id!=null ? IconButton(
                   onPressed: (){
-                    ConfirmModal.showConfirmDialog(context, title: "Are you sure?", content: const Text("After deleting transaction can't be recovered."),
+                    ConfirmModal.showConfirmDialog(context, title: "Are you sure?", content: const Text("After deleting payment can't be recovered."),
                         onConfirm: (){
-                          _transactionDao.deleteTransaction(_id!).then((value) {
-                            io.emit("transaction_update");
+                          _paymentDao.deleteTransaction(_id!).then((value) {
+                            io.emit("payment_update");
                             Navigator.pop(context);
                             Navigator.pop(context);
                           });
@@ -225,24 +225,24 @@ class _TransactionForm extends State<TransactionForm>{
                                     AppButton(
                                       onPressed: (){
                                         setState(() {
-                                          _type = TransactionType.credit;
+                                          _type = PaymentType.credit;
                                         });
                                       },
                                       label: "Income",
                                       color: Theme.of(context).colorScheme.primary,
-                                      type: _type == TransactionType.credit? AppButtonType.filled: AppButtonType.outlined,
+                                      type: _type == PaymentType.credit? AppButtonType.filled: AppButtonType.outlined,
                                       borderRadius: BorderRadius.circular(45),
                                     ),
                                     
                                     AppButton(
                                       onPressed: (){
                                         setState(() {
-                                          _type = TransactionType.debit;
+                                          _type = PaymentType.debit;
                                         });
                                       },
                                       label: "Expense",
                                       color: Theme.of(context).colorScheme.primary,
-                                      type: _type == TransactionType.debit? AppButtonType.filled: AppButtonType.outlined,
+                                      type: _type == PaymentType.debit? AppButtonType.filled: AppButtonType.outlined,
                                       borderRadius: BorderRadius.circular(45),
                                     )
                                   ],

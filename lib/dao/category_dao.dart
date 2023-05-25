@@ -23,7 +23,7 @@ class CategoryDao {
       DateTime to = DateTime.now().add(const Duration(days: 1));
       DateFormat formatter = DateFormat("yyyy-MM-dd HH:mm");
       String sql = "SELECT $fields FROM categories c "
-          "LEFT JOIN transactions t ON t.category = c.id AND t.datetime BETWEEN DATE('${formatter.format(from)}') AND DATE('${formatter.format(to)}')"
+          "LEFT JOIN payments t ON t.category = c.id AND t.datetime BETWEEN DATE('${formatter.format(from)}') AND DATE('${formatter.format(to)}')"
           "GROUP BY c.id ";
       result = await db.rawQuery(sql);
     } else {

@@ -195,7 +195,7 @@ class _AccountsScreenState extends State<AccountsScreen> {
                                     ConfirmModal.showConfirmDialog(
                                         context,
                                         title: "Are you sure?",
-                                        content: const Text("All the transactions will be deleted belongs to this account"),
+                                        content: const Text("All the paymentswill be deleted belongs to this account"),
                                         onConfirm: () async {
                                           Navigator.pop(context);
                                           await _accountDao.delete(account.id!);

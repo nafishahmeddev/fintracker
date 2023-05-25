@@ -1,16 +1,15 @@
 import 'package:events_emitter/events_emitter.dart';
 import 'package:fintracker/dao/account_dao.dart';
-import 'package:fintracker/dao/transaction_dao.dart';
+import 'package:fintracker/dao/payment_dao.dart';
 import 'package:fintracker/global_event.dart';
 import 'package:fintracker/helpers/currency.helper.dart';
 import 'package:fintracker/model/account.model.dart';
 import 'package:fintracker/model/category.model.dart';
-import 'package:fintracker/model/transaction.model.dart';
+import 'package:fintracker/model/payment.model.dart';
 import 'package:fintracker/screens/home/widgets/account_slider.dart';
-import 'package:fintracker/screens/home/widgets/transact_list_item.dart';
-import 'package:fintracker/screens/transaction_form.screen.dart';
+import 'package:fintracker/screens/home/widgets/payment_list_item.dart';
+import 'package:fintracker/screens/payment_form.screen.dart';
 import 'package:fintracker/theme/colors.dart';
-import 'package:fintracker/widgets/drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
@@ -36,12 +35,12 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final TransactionDao _transactionDao = TransactionDao();
+  final PaymentDao _paymentDao = PaymentDao();
   final AccountDao _accountDao = AccountDao();
   EventListener? _accountEventListener;
   EventListener? _categoryEventListener;
-  EventListener? _transactionEventListener;
-  List<Transaction> _transactions = [];
+  EventListener? _paymentEventListener;
+  List<Payment> _payments = [];
   List<Account> _accounts = [];
   double _income = 0;
   double _expense = 0;
@@ -53,8 +52,8 @@ class _HomeScreenState extends State<HomeScreen> {
   Account? _account;
   Category? _category;
 
-  void openAddTransactionPage(TransactionType type) async {
-    Navigator.of(context).push(MaterialPageRoute(builder: (builder)=>TransactionForm(type: type)));
+  void openAddPaymentPage(PaymentType type) async {
+    Navigator.of(context).push(MaterialPageRoute(builder: (builder)=>PaymentForm(type: type)));
   }
 
   void handleChooseDateRange() async{
@@ -73,19 +72,19 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void loadData() async {
-    List<Transaction> trans = await _transactionDao.find(range: _range, category: _category, account:_account);
+    List<Payment> trans = await _paymentDao.find(range: _range, category: _category, account:_account);
     double income = 0;
     double expense = 0;
-    for (var transaction in trans) {
-      if(transaction.type == TransactionType.credit) income += transaction.amount;
-      if(transaction.type == TransactionType.debit) expense += transaction.amount;
+    for (var payment in trans) {
+      if(payment.type == PaymentType.credit) income += payment.amount;
+      if(payment.type == PaymentType.debit) expense += payment.amount;
     }
 
     //fetch accounts
     List<Account> accounts = await _accountDao.find(withSummery: true);
 
     setState(() {
-      _transactions = trans;
+      _payments = trans;
       _income = income;
       _expense = expense;
       _accounts = accounts;
@@ -108,8 +107,8 @@ class _HomeScreenState extends State<HomeScreen> {
       loadData();
     });
 
-    _transactionEventListener = io.on("transaction_update", (data){
-      debugPrint("transactions are changed");
+    _paymentEventListener = io.on("payment_update", (data){
+      debugPrint("payments are changed");
       loadData();
     });
 
@@ -119,7 +118,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void dispose() {
     _accountEventListener?.cancel();
     _categoryEventListener?.cancel();
-    _transactionEventListener?.cancel();
+    _paymentEventListener?.cancel();
     super.dispose();
   }
   @override
@@ -159,7 +158,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 padding: const EdgeInsets.symmetric(horizontal: 15),
                 child: Row(
                     children: [
-                      const Text("Transactions", style: TextStyle(fontWeight: FontWeight.w600, fontSize: 17)),
+                      const Text("Payments", style: TextStyle(fontWeight: FontWeight.w600, fontSize: 17)),
                       const Expanded(child: SizedBox()),
                       MaterialButton(
                         onPressed: (){
@@ -247,8 +246,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 itemBuilder: (BuildContext context, index){
-                  return TransactionListItem(transaction: _transactions[index], onTap: (){
-                    Navigator.of(context).push(MaterialPageRoute(builder: (builder)=>TransactionForm(type: _transactions[index].type, transaction: _transactions[index],)));
+                  return PaymentListItem(payment: _payments[index], onTap: (){
+                    Navigator.of(context).push(MaterialPageRoute(builder: (builder)=>PaymentForm(type: _payments[index].type, payment: _payments[index],)));
                   });
 
                 },
@@ -260,13 +259,13 @@ class _HomeScreenState extends State<HomeScreen> {
                     margin: const EdgeInsets.only(left: 75, right: 20),
                   );
                 },
-                itemCount: _transactions.length,
+                itemCount: _payments.length,
               ),
             ],
           )
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: ()=> openAddTransactionPage(TransactionType.credit),
+        onPressed: ()=> openAddPaymentPage(PaymentType.credit),
         child: const Icon(Icons.add),
       ),
     );

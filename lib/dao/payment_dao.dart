@@ -4,21 +4,21 @@ import 'package:fintracker/dao/category_dao.dart';
 import 'package:fintracker/helpers/db.helper.dart';
 import 'package:fintracker/model/account.model.dart';
 import 'package:fintracker/model/category.model.dart';
-import 'package:fintracker/model/transaction.model.dart';
+import 'package:fintracker/model/payment.model.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 
-class TransactionDao {
-  Future<int> create(Transaction transaction) async {
+class PaymentDao {
+  Future<int> create(Payment payment) async {
     final db = await getDBInstance();
-    var result = db.insert("transactions", transaction.toJson());
+    var result = db.insert("payments", payment.toJson());
     return result;
   }
 
-  Future<List<Transaction>> find({
+  Future<List<Payment>> find({
     DateTimeRange? range,
-    TransactionType? type,
+    PaymentType? type,
     Category? category,
     Account? account
 }) async {
@@ -31,7 +31,7 @@ class TransactionDao {
 
     //type check
     if(type != null){
-      where += "AND type='${type == TransactionType.credit?"DR":"CR"}' ";
+      where += "AND type='${type == PaymentType.credit?"DR":"CR"}' ";
     }
 
     //icon check
@@ -49,41 +49,41 @@ class TransactionDao {
     List<Account> accounts = await AccountDao().find();
 
 
-    List<Transaction> transactions = [];
+    List<Payment> payments = [];
     List<Map<String, Object?>> rows =  await db.query(
-        "transactions",
+        "payments",
         orderBy: "datetime DESC, id DESC",
         where: "1=1 $where"
     );
     for (var row in rows) {
-      Map<String, dynamic> transaction = Map<String, dynamic>.from(row);
-      Account account = accounts.firstWhere((a) => a.id == transaction["account"]);
-      Category category = categories.firstWhere((c) => c.id == transaction["category"]);
-      transaction["category"] = category.toJson();
-      transaction["account"] = account.toJson();
-      transactions.add(Transaction.fromJson(transaction));
+      Map<String, dynamic> payment = Map<String, dynamic>.from(row);
+      Account account = accounts.firstWhere((a) => a.id == payment["account"]);
+      Category category = categories.firstWhere((c) => c.id == payment["category"]);
+      payment["category"] = category.toJson();
+      payment["account"] = account.toJson();
+      payments.add(Payment.fromJson(payment));
     }
 
-    return transactions;
+    return payments;
   }
 
-  Future<int> update(Transaction transaction) async {
+  Future<int> update(Payment payment) async {
     final db = await getDBInstance();
 
-    var result = await db.update("transactions", transaction.toJson(), where: "id = ?", whereArgs: [transaction.id]);
+    var result = await db.update("payments", payment.toJson(), where: "id = ?", whereArgs: [payment.id]);
 
     return result;
   }
 
-  Future<int> upsert(Transaction transaction) async {
+  Future<int> upsert(Payment payment) async {
     final db = await getDBInstance();
     int result;
-    if(transaction.id != null) {
+    if(payment.id != null) {
       result = await db.update(
-          "transactions", transaction.toJson(), where: "id = ?",
-          whereArgs: [transaction.id]);
+          "payments", payment.toJson(), where: "id = ?",
+          whereArgs: [payment.id]);
     } else {
-      result = await db.insert("transactions", transaction.toJson());
+      result = await db.insert("payments", payment.toJson());
     }
 
     return result;
@@ -92,14 +92,14 @@ class TransactionDao {
 
   Future<int> deleteTransaction(int id) async {
     final db = await getDBInstance();
-    var result = await db.delete("transactions", where: 'id = ?', whereArgs: [id]);
+    var result = await db.delete("payments", where: 'id = ?', whereArgs: [id]);
     return result;
   }
 
   Future deleteAllTransactions() async {
     final db = await getDBInstance();
     var result = await db.delete(
-      "transactions",
+      "payments",
     );
     return result;
   }

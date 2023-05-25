@@ -20,7 +20,7 @@ class AccountDao {
         "SUM(CASE WHEN t.type='DR' AND t.account=a.id THEN t.amount END) as expense",
         "SUM(CASE WHEN t.type='CR' AND t.account=a.id THEN t.amount END) as income"
       ].join(",");
-      String sql = "SELECT $fields FROM accounts a LEFT JOIN transactions t ON t.account = a.id GROUP BY a.id";
+      String sql = "SELECT $fields FROM accounts a LEFT JOIN payments t ON t.account = a.id GROUP BY a.id";
       result = await db.rawQuery(sql);
     } else {
       result = await db.query("accounts",);
@@ -59,7 +59,7 @@ class AccountDao {
   Future<int> delete(int id) async {
     final db = await getDBInstance();
     var result = await db.delete("accounts", where: 'id = ?', whereArgs: [id]);
-    await db.delete("transactions", where: "account = ?", whereArgs:[id]);
+    await db.delete("payments", where: "account = ?", whereArgs:[id]);
     return result;
   }
 }

@@ -1,22 +1,23 @@
 import 'package:fintracker/model/account.model.dart';
 import 'package:fintracker/model/category.model.dart';
+import 'package:fintracker/model/payment.model.dart';
 import 'package:intl/intl.dart';
 
-enum TransactionType {
+enum PaymentType {
   debit,
   credit
 }
-class Transaction {
+class Payment {
   int? id;
   Account account;
   Category category;
   double amount;
-  TransactionType type;
+  PaymentType type;
   DateTime datetime;
   String title;
   String description;
 
-  Transaction({
+  Payment({
     this.id,
     required this.account,
     required this.category,
@@ -28,15 +29,15 @@ class Transaction {
   });
 
 
-  factory Transaction.fromJson(Map<String, dynamic> data) {
-    return Transaction(
+  factory Payment.fromJson(Map<String, dynamic> data) {
+    return Payment(
       id: data["id"],
       title: data["title"] ??"",
       description: data["description"]??"",
       account: Account.fromJson(data["account"]),
       category: Category.fromJson(data["category"]),
       amount: data["amount"],
-      type: data["type"] == "CR" ? TransactionType.credit : TransactionType
+      type: data["type"] == "CR" ? PaymentType.credit : PaymentType
           .debit,
       datetime: DateTime.parse(data["datetime"]),
     );
@@ -50,6 +51,6 @@ class Transaction {
     "category": category.id,
     "amount": amount,
     "datetime": DateFormat('yyyy-MM-dd kk:mm:ss').format(datetime),
-    "type": type == TransactionType.credit ? "CR": "DR",
+    "type": type == PaymentType.credit ? "CR": "DR",
   };
 }

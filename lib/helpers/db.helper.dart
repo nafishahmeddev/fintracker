@@ -4,22 +4,22 @@ import "package:path/path.dart";
 import "package:fintracker/helpers/migrations/migrations.dart";
 import "package:sqflite_common_ffi/sqflite_ffi.dart";
 
- Database? database;
+Database? database;
 getDBInstance() async {
   if(database == null) {
     Database db;
     if(Platform.isWindows){
       sqfliteFfiInit();
       var databaseFactory = databaseFactoryFfi;
-       db = await databaseFactory.openDatabase("main.db", options: OpenDatabaseOptions(
-          version: 4,
+      db = await databaseFactory.openDatabase("database.db", options: OpenDatabaseOptions(
+          version: 1,
           onCreate: onCreate,
           onUpgrade: onUpgrade
       ));
     } else {
       String databasesPath = await getDatabasesPath();
-      String dbPath = join(databasesPath, 'main.db');
-      db = await openDatabase(dbPath, version: 4, onCreate: onCreate, onUpgrade: onUpgrade);
+      String dbPath = join(databasesPath, 'database.db');
+      db = await openDatabase(dbPath, version: 1, onCreate: onCreate, onUpgrade: onUpgrade);
     }
 
     database = db;
@@ -32,11 +32,11 @@ getDBInstance() async {
 
 typedef MigrationCallback = Function(Database database);
 List<MigrationCallback>migrations = [
-  v1, v2, v3, v4
+  v1
 ];
 void onCreate(Database database,  int version) async {
   for(MigrationCallback callback in migrations){
-     await callback(database);
+    await callback(database);
   }
 }
 

@@ -1,4 +1,4 @@
-import 'package:fintracker/model/transaction.model.dart';
+import 'package:fintracker/model/payment.model.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
@@ -6,14 +6,14 @@ import 'package:intl/intl.dart';
 import '../../../helpers/currency.helper.dart';
 import '../../../theme/colors.dart';
 
-class TransactionListItem extends StatelessWidget{
-  final Transaction transaction;
+class PaymentListItem extends StatelessWidget{
+  final Payment payment;
   final VoidCallback onTap;
-  const TransactionListItem({super.key, required this.transaction, required this.onTap});
+  const PaymentListItem({super.key, required this.payment, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
-    bool isCredit = transaction.type == TransactionType.credit ;
+    bool isCredit = payment.type == PaymentType.credit ;
     return ListTile(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(25)
@@ -24,21 +24,21 @@ class TransactionListItem extends StatelessWidget{
           width: 45,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(25),
-            color: transaction.category.color.withOpacity(0.1),
+            color: payment.category.color.withOpacity(0.1),
           ),
-          child:  Icon( transaction.category.icon, size: 22, color: transaction.category.color,)
+          child:  Icon( payment.category.icon, size: 22, color: payment.category.color,)
       ),
-      title: Text(transaction.category.name, style: Theme.of(context).textTheme.bodyMedium?.merge(const TextStyle(fontWeight: FontWeight.w500)),),
+      title: Text(payment.category.name, style: Theme.of(context).textTheme.bodyMedium?.merge(const TextStyle(fontWeight: FontWeight.w500)),),
       subtitle: Text.rich(
         TextSpan(
             children: [
-              TextSpan(text: (DateFormat("dd MMM yyyy, HH:mm").format(transaction.datetime))),
+              TextSpan(text: (DateFormat("dd MMM yyyy, HH:mm").format(payment.datetime))),
             ],
             style: Theme.of(context).textTheme.bodySmall?.apply(color: Colors.grey, overflow: TextOverflow.ellipsis)
         ),
       ),
       trailing: Text(
-          CurrencyHelper.format(isCredit? transaction.amount : -transaction.amount),
+          CurrencyHelper.format(isCredit? payment.amount : -payment.amount),
           style: Theme.of(context).textTheme.bodyMedium?.apply(color: isCredit? ThemeColors.success:ThemeColors.error, fontFamily: GoogleFonts.manrope().fontFamily)
       ),
     ) ;
