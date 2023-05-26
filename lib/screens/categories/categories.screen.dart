@@ -59,26 +59,32 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
           ),
           title: const Text("Categories", style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18),),
         ),
-        body: ListView.builder(
-            itemCount: _categories.length,
-            itemBuilder: (builder, index){
-              Category category = _categories[index];
-              double expenseProgress = (category.expense??0)/(category.budget??0);
-              return ListTile(
-                onTap: (){
-                  showDialog(context: context, builder: (builder)=>CategoryForm(category: category,));
-                },
-                leading: CircleAvatar(backgroundColor: category.color.withOpacity(0.2),child: Icon(category.icon, color: category.color,),),
-                title: Text(category.name, overflow: TextOverflow.ellipsis,style: Theme.of(context).textTheme.bodyMedium?.merge(const TextStyle(fontWeight: FontWeight.w500)),),
-                subtitle: expenseProgress.isFinite? ClipRRect(
-                  borderRadius: BorderRadius.circular(8),
-                  child: LinearProgressIndicator(value: expenseProgress, semanticsLabel: expenseProgress.toString(),),
-                ):Text("No budget", style: Theme.of(context).textTheme.bodySmall?.apply(color: Colors.grey, overflow: TextOverflow.ellipsis)),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(18)
-                ),
-              );
-            }
+        body: ListView.separated(
+          itemCount: _categories.length,
+          itemBuilder: (builder, index){
+            Category category = _categories[index];
+            double expenseProgress = (category.expense??0)/(category.budget??0);
+            return ListTile(
+              onTap: (){
+                showDialog(context: context, builder: (builder)=>CategoryForm(category: category,));
+              },
+              leading: CircleAvatar(backgroundColor: category.color.withOpacity(0.2),child: Icon(category.icon, color: category.color,),),
+              title: Text(category.name, overflow: TextOverflow.ellipsis,style: Theme.of(context).textTheme.bodyMedium?.merge(const TextStyle(fontWeight: FontWeight.w500, fontSize: 15)),),
+              subtitle: expenseProgress.isFinite? ClipRRect(
+                borderRadius: BorderRadius.circular(8),
+                child: LinearProgressIndicator(value: expenseProgress, semanticsLabel: expenseProgress.toString(),),
+              ):Text("No budget", style: Theme.of(context).textTheme.bodySmall?.apply(color: Colors.grey, overflow: TextOverflow.ellipsis)),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+            );
+          },
+          separatorBuilder: (BuildContext context, int index){
+            return Container(
+              width: double.infinity,
+              color: Colors.grey.withAlpha(25),
+              height: 1,
+              margin: const EdgeInsets.only(left: 75, right: 20),
+            );
+          },
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: (){

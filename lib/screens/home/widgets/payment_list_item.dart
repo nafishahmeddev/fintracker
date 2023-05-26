@@ -15,9 +15,7 @@ class PaymentListItem extends StatelessWidget{
   Widget build(BuildContext context) {
     bool isCredit = payment.type == PaymentType.credit ;
     return ListTile(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(25)
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
       onTap: onTap,
       leading: Container(
           height: 45,

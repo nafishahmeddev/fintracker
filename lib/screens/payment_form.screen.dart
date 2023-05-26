@@ -86,8 +86,8 @@ class _PaymentForm extends State<PaymentForm>{
     else
     {
       setState(() {
-       _type =  widget.type;
-       _initialised = true;
+        _type =  widget.type;
+        _initialised = true;
       });
     }
 
@@ -136,21 +136,21 @@ class _PaymentForm extends State<PaymentForm>{
   }
 
   void handleSaveTransaction(context) async{
-      Payment payment = Payment(id: _id,
-          account: _account!,
-          category: _category!,
-          amount: _amount,
-          type: _type,
-          datetime: _datetime,
-          title: _title,
-          description: _description
-      );
-      await _paymentDao.upsert(payment);
-      if (widget.onClose != null) {
-        widget.onClose!(payment);
-      }
-      Navigator.of(context).pop();
-      globalEvent.emit("payment_update");
+    Payment payment = Payment(id: _id,
+        account: _account!,
+        category: _category!,
+        amount: _amount,
+        type: _type,
+        datetime: _datetime,
+        title: _title,
+        description: _description
+    );
+    await _paymentDao.upsert(payment);
+    if (widget.onClose != null) {
+      widget.onClose!(payment);
+    }
+    Navigator.of(context).pop();
+    globalEvent.emit("payment_update");
   }
 
 
@@ -203,7 +203,7 @@ class _PaymentForm extends State<PaymentForm>{
                         }
                     );
 
-                  }, icon: const Icon(Icons.delete), color: ThemeColors.error
+                  }, icon: const Icon(Icons.delete, size: 20,), color: ThemeColors.error
               ) : const SizedBox()
             ],
           ),
@@ -233,7 +233,7 @@ class _PaymentForm extends State<PaymentForm>{
                                       type: _type == PaymentType.credit? AppButtonType.filled: AppButtonType.outlined,
                                       borderRadius: BorderRadius.circular(45),
                                     ),
-                                    
+
                                     AppButton(
                                       onPressed: (){
                                         setState(() {
@@ -255,7 +255,7 @@ class _PaymentForm extends State<PaymentForm>{
                                 decoration:  InputDecoration(
                                     filled: true,
                                     hintText: "Title",
-                                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(15)),
+                                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(15),),
                                     contentPadding: const EdgeInsets.symmetric(vertical: 14, horizontal: 15)
                                 ),
                                 initialValue: _title,
@@ -370,7 +370,7 @@ class _PaymentForm extends State<PaymentForm>{
                                           shape: RoundedRectangleBorder(
                                               borderRadius: BorderRadius.circular(18),
                                               side: const BorderSide(
-                                                  width: 2,
+                                                  width: 1.5,
                                                   color: Colors.transparent
                                               )
                                           ),
@@ -417,7 +417,7 @@ class _PaymentForm extends State<PaymentForm>{
                                                 shape: RoundedRectangleBorder(
                                                     borderRadius: BorderRadius.circular(18),
                                                     side: BorderSide(
-                                                        width: 2,
+                                                        width: 1.5,
                                                         color: _account?.id == account.id ? Theme.of(context).colorScheme.primary : Colors.transparent
                                                     )
                                                 ),
@@ -462,98 +462,93 @@ class _PaymentForm extends State<PaymentForm>{
                             ),
 
                             Container(
-                              padding: const EdgeInsets.only(left: 15, bottom: 10),
+                              padding: const EdgeInsets.only(left: 15, bottom: 15),
                               child: const Text("Select Category", style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16),),
                             ),
                             Container(
-                              height: 45,
-                              margin: const EdgeInsets.only(bottom: 25),
+                              margin: const EdgeInsets.only(bottom: 25, left: 15, right: 15),
                               width: double.infinity,
-                              child: ListView(
-                                  scrollDirection: Axis.horizontal,
-                                  padding: const EdgeInsets.only(left: 10, right: 10,),
+                              child: Wrap(
+                                  spacing: 10,
+                                  runSpacing: 10,
                                   children: List.generate(_categories.length + 1, (index){
-                                    if(index == 0){
-                                      return Container(
-                                          margin: const EdgeInsets.only(right: 5, left: 5),
-                                          child:  ConstrainedBox(
-                                              constraints:   const BoxConstraints(minWidth: 0,),
-                                              child:  IntrinsicWidth(
-                                                child:MaterialButton(
-                                                    color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
-                                                    shape: RoundedRectangleBorder(
-                                                        borderRadius: BorderRadius.circular(15),
-                                                        side: const BorderSide(
-                                                            width: 2,
-                                                            color: Colors.transparent
-                                                        )
-                                                    ),
-                                                    padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 0),
-                                                    elevation: 0,
-                                                    focusElevation: 0,
-                                                    hoverElevation: 0,
-                                                    highlightElevation: 0,
-                                                    disabledElevation: 0,
-                                                    onPressed: (){
-                                                      showDialog(context: context, builder: (builder)=> const CategoryForm());
-                                                    },
-                                                    child:  SizedBox(
-                                                      width: double.infinity,
-                                                      child: Row(
-                                                        children: [
-                                                          Icon(Icons.add, color: Theme.of(context).colorScheme.primary,),
-                                                          const SizedBox(width: 10,),
-                                                          Text("New Category", style: Theme.of(context).textTheme.bodyMedium),
-                                                        ],
-                                                      ),
+                                    if(_categories.length == index){
+                                      return ConstrainedBox(
+                                          constraints:   const BoxConstraints(minWidth: 0,),
+                                          child:  IntrinsicWidth(
+                                            child:MaterialButton(
+                                                materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                                                color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
+                                                shape: RoundedRectangleBorder(
+                                                    borderRadius: BorderRadius.circular(15),
+                                                    side: const BorderSide(
+                                                        width: 1.5,
+                                                        color: Colors.transparent
                                                     )
                                                 ),
-                                              )
+                                                padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 0),
+                                                elevation: 0,
+                                                focusElevation: 0,
+                                                hoverElevation: 0,
+                                                highlightElevation: 0,
+                                                disabledElevation: 0,
+                                                onPressed: (){
+                                                  showDialog(context: context, builder: (builder)=> const CategoryForm());
+                                                },
+                                                child:  SizedBox(
+                                                  width: double.infinity,
+                                                  child: Row(
+                                                    children: [
+                                                      Icon(Icons.add, color: Theme.of(context).colorScheme.primary,),
+                                                      const SizedBox(width: 10,),
+                                                      Text("New Category", style: Theme.of(context).textTheme.bodyMedium),
+                                                    ],
+                                                  ),
+                                                )
+                                            ),
                                           )
                                       );
                                     }
-                                    Category category = _categories[index -1];
-                                    return Container(
-                                      margin: const EdgeInsets.only(right: 5, left: 5),
-                                      child: ConstrainedBox(
-                                          constraints:   const BoxConstraints(minWidth: 0,),
-                                          child:  IntrinsicWidth(
-                                              child:MaterialButton(
-                                                  color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
-                                                  shape: RoundedRectangleBorder(
-                                                      borderRadius: BorderRadius.circular(15),
-                                                      side: BorderSide(
-                                                          width: 2,
-                                                          color: _category?.id == category.id ? Theme.of(context).colorScheme.primary : Colors.transparent
-                                                      )
+                                    Category category = _categories[index];
+                                    return ConstrainedBox(
+                                        constraints:   const BoxConstraints(minWidth: 0,),
+                                        child:  IntrinsicWidth(
+                                            child:MaterialButton(
+                                                color: Theme.of(context).colorScheme.primary.withOpacity(0.1),
+                                                shape: RoundedRectangleBorder(
+                                                    borderRadius: BorderRadius.circular(15),
+                                                    side: BorderSide(
+                                                        width: 1.5,
+                                                        color: _category?.id == category.id ? Theme.of(context).colorScheme.primary : Colors.transparent
+                                                    )
+                                                ),
+                                                padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 0),
+                                                elevation: 0,
+                                                focusElevation: 0,
+                                                hoverElevation: 0,
+                                                highlightElevation: 0,
+                                                disabledElevation: 0,
+                                                materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                                                onPressed: (){
+                                                  setState(() {
+                                                    _category = category;
+                                                  });
+                                                },
+                                                onLongPress: (){
+                                                  showDialog(context: context, builder: (builder)=>CategoryForm(category: category,));
+                                                },
+                                                child:  SizedBox(
+                                                  width: double.infinity,
+                                                  child: Row(
+                                                    children: [
+                                                      Icon(category.icon, color: category.color),
+                                                      const SizedBox(width: 10,),
+                                                      Text(category.name, style: Theme.of(context).textTheme.bodyMedium, overflow: TextOverflow.ellipsis,),
+                                                    ],
                                                   ),
-                                                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
-                                                  elevation: 0,
-                                                  focusElevation: 0,
-                                                  hoverElevation: 0,
-                                                  highlightElevation: 0,
-                                                  disabledElevation: 0,
-                                                  onPressed: (){
-                                                    setState(() {
-                                                      _category = category;
-                                                    });
-                                                  },
-                                                  onLongPress: (){
-                                                    showDialog(context: context, builder: (builder)=>CategoryForm(category: category,));
-                                                  },
-                                                  child:  SizedBox(
-                                                    width: double.infinity,
-                                                    child: Row(
-                                                      children: [
-                                                        Icon(category.icon, color: category.color),
-                                                        const SizedBox(width: 10,),
-                                                        Text(category.name, style: Theme.of(context).textTheme.bodyMedium, overflow: TextOverflow.ellipsis,),
-                                                      ],
-                                                    ),
-                                                  )
-                                              )
-                                          )
-                                      ),
+                                                )
+                                            )
+                                        )
                                     );
 
                                   })
