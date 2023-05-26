@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "me.nafish" "\0"
-            VALUE "FileDescription", "fintracker" "\0"
+            VALUE "FileDescription", "Fintracker" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "fintracker" "\0"
+            VALUE "InternalName", "Fintracker" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2023 me.nafish. All rights reserved." "\0"
             VALUE "OriginalFilename", "fintracker.exe" "\0"
-            VALUE "ProductName", "fintracker" "\0"
+            VALUE "ProductName", "Fintracker" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END
