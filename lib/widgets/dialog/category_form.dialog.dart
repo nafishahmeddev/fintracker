@@ -36,7 +36,7 @@ class _CategoryForm extends State<CategoryForm>{
       widget.onSave!();
     }
     Navigator.pop(context);
-    io.emit("category_update");
+    globalEvent.emit("category_update");
   }
 
   void pickIcon(context)async {

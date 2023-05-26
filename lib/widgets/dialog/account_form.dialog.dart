@@ -47,7 +47,7 @@ class _AccountForm extends State<AccountForm>{
       widget.onSave!();
     }
     Navigator.pop(context);
-    io.emit("account_update");
+    globalEvent.emit("account_update");
   }
 
   void pickIcon(context)async {

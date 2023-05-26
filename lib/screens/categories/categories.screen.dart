@@ -32,7 +32,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
     super.initState();
     loadData();
 
-    _categoryEventListener = io.on("category_update", (data){
+    _categoryEventListener = globalEvent.on("category_update", (data){
       debugPrint("categories are changed");
       loadData();
     });

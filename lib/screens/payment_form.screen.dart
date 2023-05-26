@@ -150,7 +150,7 @@ class _PaymentForm extends State<PaymentForm>{
         widget.onClose!(payment);
       }
       Navigator.of(context).pop();
-      io.emit("payment_update");
+      globalEvent.emit("payment_update");
   }
 
 
@@ -158,12 +158,12 @@ class _PaymentForm extends State<PaymentForm>{
   void initState()  {
     super.initState();
     populateState();
-    _accountEventListener = io.on("account_update", (data){
+    _accountEventListener = globalEvent.on("account_update", (data){
       debugPrint("accounts are changed");
       loadAccounts();
     });
 
-    _categoryEventListener = io.on("category_update", (data){
+    _categoryEventListener = globalEvent.on("category_update", (data){
       debugPrint("categories are changed");
       loadCategories();
     });
@@ -193,7 +193,7 @@ class _PaymentForm extends State<PaymentForm>{
                     ConfirmModal.showConfirmDialog(context, title: "Are you sure?", content: const Text("After deleting payment can't be recovered."),
                         onConfirm: (){
                           _paymentDao.deleteTransaction(_id!).then((value) {
-                            io.emit("payment_update");
+                            globalEvent.emit("payment_update");
                             Navigator.pop(context);
                             Navigator.pop(context);
                           });

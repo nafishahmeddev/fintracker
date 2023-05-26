@@ -45,7 +45,7 @@ class _AccountsScreenState extends State<AccountsScreen> {
     super.initState();
     loadData();
 
-    _accountEventListener = io.on("account_update", (data){
+    _accountEventListener = globalEvent.on("account_update", (data){
       debugPrint("accounts are changed");
       loadData();
     });
@@ -199,7 +199,7 @@ class _AccountsScreenState extends State<AccountsScreen> {
                                         onConfirm: () async {
                                           Navigator.pop(context);
                                           await _accountDao.delete(account.id!);
-                                          io.emit("account_update");
+                                          globalEvent.emit("account_update");
                                         },
                                         onCancel: (){
                                           Navigator.pop(context);

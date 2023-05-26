@@ -1,8 +1,7 @@
 import 'package:events_emitter/emitters/event_emitter.dart';
-
-class GlobalEvent{
-  final String type;
-  final Map<String, dynamic> payload;
-  GlobalEvent(this.type, this.payload);
+enum GlobalEventTypes{
+  paymentUpdate,
+  categoryUpdate,
+  accountUpdate
 }
-final io = EventEmitter();
+final globalEvent = EventEmitter();

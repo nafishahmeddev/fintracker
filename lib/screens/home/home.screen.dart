@@ -97,17 +97,17 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     loadData();
 
-    _accountEventListener = io.on("account_update", (data){
+    _accountEventListener = globalEvent.on("account_update", (data){
       debugPrint("accounts are changed");
       loadData();
     });
 
-    _categoryEventListener = io.on("category_update", (data){
+    _categoryEventListener = globalEvent.on("category_update", (data){
       debugPrint("categories are changed");
       loadData();
     });
 
-    _paymentEventListener = io.on("payment_update", (data){
+    _paymentEventListener = globalEvent.on("payment_update", (data){
       debugPrint("payments are changed");
       loadData();
     });

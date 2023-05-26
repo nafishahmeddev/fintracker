@@ -15,7 +15,7 @@ class MainDrawer extends StatelessWidget{
         NavigationDrawerDestination(icon: Icon(Icons.settings), label: Text("Settings")),
       ],
       onDestinationSelected: (int selected){
-        io.emit("main-page-destination-change", selected);
+        globalEvent.emit("main-page-destination-change", selected);
       },
     );
   }
