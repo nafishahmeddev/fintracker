@@ -66,12 +66,12 @@ class _HomeScreenState extends State<HomeScreen> {
     if(selected != null) {
       setState(() {
         _range = selected;
-        loadData();
+        _fetchTransactions();
       });
     }
   }
 
-  void loadData() async {
+  void _fetchTransactions() async {
     List<Payment> trans = await _paymentDao.find(range: _range, category: _category, account:_account);
     double income = 0;
     double expense = 0;
@@ -95,21 +95,21 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    loadData();
+    _fetchTransactions();
 
     _accountEventListener = globalEvent.on("account_update", (data){
       debugPrint("accounts are changed");
-      loadData();
+      _fetchTransactions();
     });
 
     _categoryEventListener = globalEvent.on("category_update", (data){
       debugPrint("categories are changed");
-      loadData();
+      _fetchTransactions();
     });
 
     _paymentEventListener = globalEvent.on("payment_update", (data){
       debugPrint("payments are changed");
-      loadData();
+      _fetchTransactions();
     });
 
   }
