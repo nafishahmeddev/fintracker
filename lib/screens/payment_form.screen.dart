@@ -2,11 +2,12 @@ import 'package:events_emitter/listener.dart';
 import 'package:fintracker/dao/account_dao.dart';
 import 'package:fintracker/dao/category_dao.dart';
 import 'package:fintracker/dao/payment_dao.dart';
-import 'package:fintracker/global_event.dart';
+import 'package:fintracker/events.dart';
 import 'package:fintracker/model/account.model.dart';
 import 'package:fintracker/model/category.model.dart';
 import 'package:fintracker/model/payment.model.dart';
 import 'package:fintracker/theme/colors.dart';
+import 'package:fintracker/widgets/currency.dart';
 import 'package:fintracker/widgets/dialog/account_form.dialog.dart';
 import 'package:fintracker/widgets/dialog/category_form.dialog.dart';
 import 'package:fintracker/widgets/buttons/button.dart';
@@ -180,7 +181,6 @@ class _PaymentForm extends State<PaymentForm>{
 
   @override
   Widget build(BuildContext context) {
-
     if(!_initialised) return const CircularProgressIndicator();
 
     return
@@ -287,7 +287,7 @@ class _PaymentForm extends State<PaymentForm>{
                             ),
                             Container(
                                 margin: const EdgeInsets.only(left: 15, right: 15, bottom:25),
-                                child:    TextFormField(
+                                child: TextFormField(
                                   keyboardType: TextInputType.number,
                                   inputFormatters: <TextInputFormatter>[
                                     FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,4}')),
@@ -296,7 +296,7 @@ class _PaymentForm extends State<PaymentForm>{
                                   decoration: InputDecoration(
                                       filled: true,
                                       hintText: "0.0",
-                                      prefixIcon: Padding(padding: const EdgeInsets.only(left: 15), child: Text("₹ ", style: GoogleFonts.jetBrainsMono())),
+                                      prefixIcon: Padding(padding: const EdgeInsets.only(left: 15), child: CurrencyText(null, style: GoogleFonts.jetBrainsMono())),
                                       prefixIconConstraints: const BoxConstraints(minWidth: 0, minHeight: 0),
                                       border: OutlineInputBorder(borderRadius: BorderRadius.circular(15)),
                                       contentPadding: const EdgeInsets.symmetric(vertical: 14, horizontal: 15)

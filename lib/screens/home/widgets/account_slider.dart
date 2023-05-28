@@ -1,5 +1,5 @@
-import 'package:fintracker/helpers/currency.helper.dart';
 import 'package:fintracker/model/account.model.dart';
+import 'package:fintracker/widgets/currency.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -57,7 +57,7 @@ class _AccountSlider extends State<AccountsSlider>{
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(CurrencyHelper.format(account.balance ?? 0), style: Theme.of(context).textTheme.headlineMedium?.merge(
+                              CurrencyText(account.balance ?? 0, style: Theme.of(context).textTheme.headlineMedium?.merge(
                                 TextStyle(
                                     color: Colors.white, fontFamily: GoogleFonts.jetBrainsMono().fontFamily,
                                     fontWeight: FontWeight.w700

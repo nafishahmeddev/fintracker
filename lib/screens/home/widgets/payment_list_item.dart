@@ -1,9 +1,8 @@
 import 'package:fintracker/model/payment.model.dart';
+import 'package:fintracker/widgets/currency.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
-
-import '../../../helpers/currency.helper.dart';
 import '../../../theme/colors.dart';
 
 class PaymentListItem extends StatelessWidget{
@@ -35,8 +34,8 @@ class PaymentListItem extends StatelessWidget{
             style: Theme.of(context).textTheme.bodySmall?.apply(color: Colors.grey, overflow: TextOverflow.ellipsis)
         ),
       ),
-      trailing: Text(
-          CurrencyHelper.format(isCredit? payment.amount : -payment.amount),
+      trailing: CurrencyText(
+          isCredit? payment.amount : -payment.amount,
           style: Theme.of(context).textTheme.bodyMedium?.apply(color: isCredit? ThemeColors.success:ThemeColors.error, fontFamily: GoogleFonts.manrope().fontFamily)
       ),
     ) ;

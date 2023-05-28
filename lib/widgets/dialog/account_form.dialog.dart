@@ -1,5 +1,5 @@
 import 'package:fintracker/dao/account_dao.dart';
-import 'package:fintracker/global_event.dart';
+import 'package:fintracker/events.dart';
 import 'package:fintracker/model/account.model.dart';
 import 'package:fintracker/widgets/buttons/button.dart';
 import 'package:flutter/material.dart';

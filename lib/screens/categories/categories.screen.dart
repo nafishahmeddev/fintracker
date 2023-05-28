@@ -1,6 +1,6 @@
 import 'package:events_emitter/events_emitter.dart';
 import 'package:fintracker/dao/category_dao.dart';
-import 'package:fintracker/global_event.dart';
+import 'package:fintracker/events.dart';
 import 'package:fintracker/model/category.model.dart';
 import 'package:fintracker/widgets/dialog/category_form.dialog.dart';
 import 'package:flutter/material.dart';

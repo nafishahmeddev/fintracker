@@ -1,8 +1,9 @@
 import 'package:fintracker/dao/category_dao.dart';
 import 'package:fintracker/data/icons.dart';
-import 'package:fintracker/global_event.dart';
+import 'package:fintracker/events.dart';
 import 'package:fintracker/model/category.model.dart';
 import 'package:fintracker/widgets/buttons/button.dart';
+import 'package:fintracker/widgets/currency.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -106,7 +107,7 @@ class _CategoryForm extends State<CategoryForm>{
                       borderRadius: BorderRadius.circular(15),
                     ),
                     contentPadding: const EdgeInsets.symmetric(vertical: 12, horizontal: 15),
-                  prefixIcon: Padding(padding: const EdgeInsets.only(left: 15), child: Text("₹ ", style: GoogleFonts.jetBrainsMono())),
+                  prefixIcon: Padding(padding: const EdgeInsets.only(left: 15), child: CurrencyText(null, style: GoogleFonts.jetBrainsMono())),
                   prefixIconConstraints: const BoxConstraints(minWidth: 0, minHeight: 0),
                 ),
                 onChanged: (String text){

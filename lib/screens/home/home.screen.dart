@@ -1,8 +1,8 @@
 import 'package:events_emitter/events_emitter.dart';
+import 'package:fintracker/bloc/cubit/app_cubit.dart';
 import 'package:fintracker/dao/account_dao.dart';
 import 'package:fintracker/dao/payment_dao.dart';
-import 'package:fintracker/global_event.dart';
-import 'package:fintracker/helpers/currency.helper.dart';
+import 'package:fintracker/events.dart';
 import 'package:fintracker/model/account.model.dart';
 import 'package:fintracker/model/category.model.dart';
 import 'package:fintracker/model/payment.model.dart';
@@ -10,7 +10,9 @@ import 'package:fintracker/screens/home/widgets/account_slider.dart';
 import 'package:fintracker/screens/home/widgets/payment_list_item.dart';
 import 'package:fintracker/screens/payment_form.screen.dart';
 import 'package:fintracker/theme/colors.dart';
+import 'package:fintracker/widgets/currency.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
@@ -111,7 +113,6 @@ class _HomeScreenState extends State<HomeScreen> {
       debugPrint("payments are changed");
       _fetchTransactions();
     });
-
   }
 
   @override
@@ -143,7 +144,12 @@ class _HomeScreenState extends State<HomeScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text("Hi! Good ${greeting()}"),
-                    // Text("Guest", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),),
+                    BlocConsumer<AppCubit, AppState>(
+                        listener: (context, state){
+
+                        },
+                        builder: (context, state)=>Text(state.username ?? "Guest", style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600),)
+                    )
                   ],
                 ),
               ),
@@ -204,7 +210,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       )
                                   ),
                                   const SizedBox(height: 5,),
-                                  Text(CurrencyHelper.format(_income), style:  TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: ThemeColors.success, fontFamily: GoogleFonts.jetBrainsMono().fontFamily),)
+                                  CurrencyText(_income, style:  TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: ThemeColors.success, fontFamily: GoogleFonts.jetBrainsMono().fontFamily),)
                                 ],
                               ),
                             )
@@ -232,7 +238,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       )
                                   ),
                                   const SizedBox(height: 5,),
-                                  Text(CurrencyHelper.format(_expense), style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: ThemeColors.error, fontFamily: GoogleFonts.jetBrainsMono().fontFamily),)
+                                  CurrencyText(_expense, style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: ThemeColors.error, fontFamily: GoogleFonts.jetBrainsMono().fontFamily),)
                                 ],
                               ),
                             )
@@ -241,7 +247,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
               ),
-              ListView.separated(
+              _payments.isNotEmpty? ListView.separated(
                 padding:  EdgeInsets.zero,
                 physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
@@ -260,6 +266,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   );
                 },
                 itemCount: _payments.length,
+              ):Container(
+                padding: const EdgeInsets.symmetric(vertical: 25),
+                alignment: Alignment.center,
+                child: const Text("No payments!"),
               ),
             ],
           )
