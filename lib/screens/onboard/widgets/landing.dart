@@ -57,7 +57,7 @@ class LandingPage extends StatelessWidget{
                   onPressed: onGetStarted,
                   size: AppButtonSize.large,
                   label: "Get Started",
-                  labelStyle: TextStyle(fontWeight: FontWeight.bold),
+                  labelStyle: const TextStyle(fontWeight: FontWeight.bold),
                 ),
               )
 

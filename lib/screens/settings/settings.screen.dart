@@ -1,5 +1,4 @@
 import 'package:currency_picker/currency_picker.dart';
-import 'package:fintracker/app.dart';
 import 'package:fintracker/bloc/cubit/app_cubit.dart';
 import 'package:fintracker/helpers/color.helper.dart';
 import 'package:fintracker/helpers/db.helper.dart';
@@ -9,7 +8,6 @@ import 'package:fintracker/widgets/dialog/confirm.modal.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:settings_ui/settings_ui.dart';
-import 'package:sqflite/sqflite.dart';
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
 

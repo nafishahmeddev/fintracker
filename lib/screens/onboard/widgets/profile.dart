@@ -31,7 +31,7 @@ class ProfileWidget extends StatelessWidget{
                 decoration: InputDecoration(
                   filled: true,
                   border: OutlineInputBorder(borderRadius: BorderRadius.circular(18)),
-                  prefixIcon: Icon(Icons.account_circle),
+                  prefixIcon: const Icon(Icons.account_circle),
                   hintText: "Enter your name",
                   label: const Text("Name")
                 ),
