@@ -25,7 +25,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     ThemeData theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Settings"),
+        title: const Text("Settings", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),),
       ),
         body: SettingsList(
           platform: DevicePlatform.android,
