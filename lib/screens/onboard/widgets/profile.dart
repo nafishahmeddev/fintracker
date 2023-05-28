@@ -20,7 +20,7 @@ class ProfileWidget extends StatelessWidget{
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Icon(Icons.wallet, size: 70,),
+              const Icon(Icons.account_balance_wallet, size: 70,),
               const SizedBox(height: 25,),
               Text("Hi! welcome to Fintracker", style: theme.textTheme.headlineMedium!.apply(color: theme.colorScheme.primary, fontWeightDelta: 1),),
               const SizedBox(height: 15,),
