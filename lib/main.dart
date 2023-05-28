@@ -26,14 +26,18 @@ class App extends StatelessWidget {
 
     return DynamicColorBuilder(
         builder: (ColorScheme? lightDynamic, ColorScheme? darkDynamic) {
-          Color? seedColor = ThemeColors.primary;
-          if (lightDynamic != null && darkDynamic != null) {
-            seedColor = darkDynamic.primary;
+          ColorScheme scheme = ColorScheme.fromSeed(seedColor: ThemeColors.primary, brightness: MediaQuery.of(context).platformBrightness);
+          if(isDarkMode && darkDynamic !=null){
+            scheme = darkDynamic.harmonized();
           }
+          if(!isDarkMode && lightDynamic !=null){
+            scheme = lightDynamic.harmonized();
+          }
+
           return MaterialApp(
             title: 'Fintracker',
             theme: ThemeData(
-              colorSchemeSeed: seedColor,
+              colorScheme: scheme,
               useMaterial3: true,
               brightness: MediaQuery.of(context).platformBrightness,
               textTheme: GoogleFonts.rubikTextTheme(

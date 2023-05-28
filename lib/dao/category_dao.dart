@@ -19,7 +19,7 @@ class CategoryDao {
         "c.id","c.name","c.icon","c.color", "c.budget",
         "SUM(CASE WHEN t.type='DR' AND t.category=c.id THEN t.amount END) as expense"
       ].join(",");
-      DateTime from = DateTime(DateTime.now().year, 1,1,0,0);
+      DateTime from = DateTime(DateTime.now().year, DateTime.now().month,1,0,0);
       DateTime to = DateTime.now().add(const Duration(days: 1));
       DateFormat formatter = DateFormat("yyyy-MM-dd HH:mm");
       String sql = "SELECT $fields FROM categories c "
