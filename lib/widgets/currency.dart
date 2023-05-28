@@ -16,7 +16,7 @@ class CurrencyText extends StatelessWidget{
   Widget build(BuildContext context) {
     return BlocBuilder<AppCubit, AppState>(builder: (context, state){
       Currency? currency = currencyService.findByCode(state.currency!);
-      return Text(amount==null? currency!.symbol : CurrencyHelper.format(amount!, name: currency!.code, symbol: currency.symbol), style: style, overflow: overflow,);
+      return Text(amount==null? "${currency!.symbol} " : CurrencyHelper.format(amount!, name: currency?.code, symbol: currency?.symbol), style: style, overflow: overflow,);
     });
   }
 }

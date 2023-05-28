@@ -79,7 +79,7 @@ class _CurrencyPicWidget extends State<CurrencyPicWidget>{
                                         color: _currency == currency.code?  theme.colorScheme.primary : Colors.transparent
                                     )
                                 ),
-                                padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+                                padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 20),
                                 elevation: 0,
                                 focusElevation: 0,
                                 hoverElevation: 0,
@@ -100,6 +100,7 @@ class _CurrencyPicWidget extends State<CurrencyPicWidget>{
                                           backgroundColor: Theme.of(context).colorScheme.primary.withOpacity(0.3),
                                           child: Text(currency.symbol),
                                         ),
+                                        SizedBox(height: 10,),
                                         Text(currency.name, style: Theme.of(context).textTheme.bodyMedium?.apply(fontWeightDelta: 2), overflow: TextOverflow.ellipsis,),
                                         Text(currency.code, style: Theme.of(context).textTheme.bodySmall, overflow: TextOverflow.ellipsis,),
                                       ],
