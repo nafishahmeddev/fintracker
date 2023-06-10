@@ -4,7 +4,7 @@
 
 FinTracker is a Flutter application that helps you track your expenses and manage category budgets. It provides a user-friendly interface to enter and categorize your expenses, giving you insights into your spending habits and helping you stay within your budget.
 
-![FinTracker Screenshot](screenshots/fintracker_screenshot.png)
+![FinTracker Screenshot](screenshots/fintracker_screenshot.jpg)
 
 ## Features
 
