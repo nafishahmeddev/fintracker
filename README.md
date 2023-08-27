@@ -6,6 +6,13 @@ FinTracker is a Flutter application that helps you track your expenses and manag
 
 ![FinTracker Screenshot](screenshots/fintracker_screenshot.jpg)
 
+
+## Download
+
+You can download FinTracker from the Google Play Store:
+
+[![Google Play Store](https://img.shields.io/badge/Download-Play%20Store-brightgreen.svg)](https://play.google.com/store/apps/details?id=me.nafish.fintracker)
+
 ## Features
 
 - Track and record your expenses conveniently.
