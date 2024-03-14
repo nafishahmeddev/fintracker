@@ -64,12 +64,6 @@ class _AccountsScreenState extends State<AccountsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          leading: IconButton(
-            icon: const Icon(Icons.menu),
-            onPressed: (){
-              Scaffold.of(context).openDrawer();
-            },
-          ),
           title: const Text("Accounts", style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18),),
         ),
         body: ListView.builder(
@@ -95,9 +89,9 @@ class _AccountsScreenState extends State<AccountsScreen> {
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(account.holderName, style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 18),),
+                                  Text(account.holderName.isEmpty ? "---": account.holderName, style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 18),),
                                   Text(account.name, style: Theme.of(context).textTheme.bodySmall,),
-                                  Text(maskAccount(account.accountNumber), style: Theme.of(context).textTheme.bodySmall,),
+                                  Text(account.accountNumber.isEmpty ? "---": maskAccount(account.accountNumber), style: Theme.of(context).textTheme.bodySmall,),
                                 ],
                               )
                             ],

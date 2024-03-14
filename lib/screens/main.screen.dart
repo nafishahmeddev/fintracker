@@ -50,29 +50,15 @@ class _MainScreenState extends State<MainScreen>{
               NavigationDestination(icon: Icon(Icons.home), label: "Home"),
               NavigationDestination(icon: Icon(Icons.wallet), label: "Accounts"),
               NavigationDestination(icon: Icon(Icons.category), label: "Categories"),
+              NavigationDestination(icon: Icon(Icons.settings), label: "Settings"),
             ],
             onDestinationSelected: (int selected){
-              _controller.jumpToPage(selected);
-            },
-          ),
-          drawer: NavigationDrawer(
-            selectedIndex: _selected,
-            children: const [
-              NavigationDrawerDestination(icon: Icon(Icons.home), label: Text("Home")),
-              NavigationDrawerDestination(icon: Icon(Icons.wallet), label: Text("Accounts")),
-              NavigationDrawerDestination(icon: Icon(Icons.category), label: Text("Categories")),
-              NavigationDrawerDestination(icon: Icon(Icons.settings), label: Text("Settings")),
-            ],
-            onDestinationSelected: (int selected){
-              Navigator.pop(context);
               if(selected < 3){
                 _controller.jumpToPage(selected);
               }
-
               if(selected == 3){
                 Navigator.of(context).push(MaterialPageRoute(builder: (context)=>const SettingsScreen()));
               }
-
             },
           ),
         );

@@ -125,21 +125,21 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.menu),
-          onPressed: (){
-            Scaffold.of(context).openDrawer();
-          },
-        ),
-        title: const Text("Home", style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18),),
-      ),
+      // appBar: AppBar(
+      //   leading: IconButton(
+      //     icon: const Icon(Icons.menu),
+      //     onPressed: (){
+      //       Scaffold.of(context).openDrawer();
+      //     },
+      //   ),
+      //   title: const Text("Home", style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18),),
+      // ),
       body: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                margin: const EdgeInsets.only(left: 15, right: 15, bottom: 15),
+                margin: const EdgeInsets.only(left: 15, right: 15, bottom: 15, top: 60),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
