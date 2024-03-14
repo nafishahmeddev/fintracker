@@ -46,20 +46,20 @@ android {
         versionName flutterVersionName
     }
 
-    signingConfigs {
-        release {
-            keyAlias 'nafish.ahmed.dev'
-            keyPassword '@#Password123@#'
-            storeFile file('D:\\androidKeys\\me.nafish.keystore')
-            storePassword '@#Password123@#'
-        }
-    }
+//    signingConfigs {
+//        release {
+//            keyAlias 'nafish.ahmed.dev'
+//            keyPassword '@#Password123@#'
+//            storeFile file('D:\\androidKeys\\me.nafish.keystore')
+//            storePassword '@#Password123@#'
+//        }
+//    }
     buildTypes {
         release {
             // TODO: Add your own signing config for the release build.
             // Signing with the debug keys for now, so `flutter run --release` works.
-            // signingConfig signingConfigs.debug
-            signingConfig signingConfigs.release
+             signingConfig signingConfigs.debug
+            // signingConfig signingConfigs.release
         }
     }
 }
