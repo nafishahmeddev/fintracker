@@ -6,7 +6,6 @@ import 'package:fintracker/widgets/buttons/button.dart';
 import 'package:fintracker/widgets/currency.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 typedef Callback = void Function();
 class CategoryForm extends StatefulWidget {
   final Category? category;
@@ -99,7 +98,6 @@ class _CategoryForm extends State<CategoryForm>{
                 inputFormatters: <TextInputFormatter>[
                   FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,4}')),
                 ],
-                style: GoogleFonts.manrope(),
                 decoration: InputDecoration(
                     labelText: 'Budget',
                     hintText: 'Enter budget',
@@ -107,7 +105,7 @@ class _CategoryForm extends State<CategoryForm>{
                       borderRadius: BorderRadius.circular(15),
                     ),
                     contentPadding: const EdgeInsets.symmetric(vertical: 12, horizontal: 15),
-                  prefixIcon: Padding(padding: const EdgeInsets.only(left: 15), child: CurrencyText(null, style: GoogleFonts.jetBrainsMono())),
+                  prefixIcon: Padding(padding: const EdgeInsets.only(left: 15), child: CurrencyText(null)),
                   prefixIconConstraints: const BoxConstraints(minWidth: 0, minHeight: 0),
                 ),
                 onChanged: (String text){

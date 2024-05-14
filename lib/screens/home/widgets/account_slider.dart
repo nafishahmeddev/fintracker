@@ -1,7 +1,6 @@
 import 'package:fintracker/model/account.model.dart';
 import 'package:fintracker/widgets/currency.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class AccountsSlider extends StatefulWidget{
   final List<Account> accounts;
@@ -58,8 +57,8 @@ class _AccountSlider extends State<AccountsSlider>{
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               CurrencyText(account.balance ?? 0, style: Theme.of(context).textTheme.headlineMedium?.merge(
-                                TextStyle(
-                                    color: Colors.white, fontFamily: GoogleFonts.jetBrainsMono().fontFamily,
+                                const TextStyle(
+                                    color: Colors.white,
                                     fontWeight: FontWeight.w700
                                 ),
                               )),
@@ -89,8 +88,8 @@ class _AccountSlider extends State<AccountsSlider>{
             },
           ),
         ),
-        const SizedBox(height: 10,),
-        SizedBox(
+        if(widget.accounts.length > 1) const SizedBox(height: 10,),
+        if(widget.accounts.length > 1) SizedBox(
           width: double.infinity,
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,

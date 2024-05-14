@@ -6,6 +6,7 @@ import 'package:fintracker/screens/onboard/onboard_screen.dart';
 import 'package:fintracker/screens/settings/settings.screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:material_symbols_icons/symbols.dart';
 
 class MainScreen extends StatefulWidget{
   const MainScreen({super.key});
@@ -36,7 +37,8 @@ class _MainScreenState extends State<MainScreen>{
             children: const [
               HomeScreen(),
               AccountsScreen(),
-              CategoriesScreen()
+              CategoriesScreen(),
+              SettingsScreen()
             ],
             onPageChanged: (int index){
               setState(() {
@@ -47,18 +49,13 @@ class _MainScreenState extends State<MainScreen>{
           bottomNavigationBar: NavigationBar(
             selectedIndex: _selected,
             destinations: const [
-              NavigationDestination(icon: Icon(Icons.home), label: "Home"),
-              NavigationDestination(icon: Icon(Icons.wallet), label: "Accounts"),
-              NavigationDestination(icon: Icon(Icons.category), label: "Categories"),
-              NavigationDestination(icon: Icon(Icons.settings), label: "Settings"),
+              NavigationDestination(icon: Icon(Symbols.home, fill: 1,), label: "Home"),
+              NavigationDestination(icon: Icon(Symbols.wallet, fill: 1,), label: "Accounts"),
+              NavigationDestination(icon: Icon(Symbols.category, fill: 1,), label: "Categories"),
+              NavigationDestination(icon: Icon(Symbols.settings, fill: 1,), label: "Settings"),
             ],
             onDestinationSelected: (int selected){
-              if(selected < 3){
                 _controller.jumpToPage(selected);
-              }
-              if(selected == 3){
-                Navigator.of(context).push(MaterialPageRoute(builder: (context)=>const SettingsScreen()));
-              }
             },
           ),
         );

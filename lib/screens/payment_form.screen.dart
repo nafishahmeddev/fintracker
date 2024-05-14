@@ -14,7 +14,6 @@ import 'package:fintracker/widgets/buttons/button.dart';
 import 'package:fintracker/widgets/dialog/confirm.modal.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
 typedef OnCloseCallback = Function(Payment payment);
@@ -292,11 +291,10 @@ class _PaymentForm extends State<PaymentForm>{
                                   inputFormatters: <TextInputFormatter>[
                                     FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,4}')),
                                   ],
-                                  style: GoogleFonts.manrope(),
                                   decoration: InputDecoration(
                                       filled: true,
                                       hintText: "0.0",
-                                      prefixIcon: Padding(padding: const EdgeInsets.only(left: 15), child: CurrencyText(null, style: GoogleFonts.jetBrainsMono())),
+                                      prefixIcon: Padding(padding: const EdgeInsets.only(left: 15), child: CurrencyText(null)),
                                       prefixIconConstraints: const BoxConstraints(minWidth: 0, minHeight: 0),
                                       border: OutlineInputBorder(borderRadius: BorderRadius.circular(15)),
                                       contentPadding: const EdgeInsets.symmetric(vertical: 14, horizontal: 15)

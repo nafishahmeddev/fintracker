@@ -13,7 +13,6 @@ import 'package:fintracker/theme/colors.dart';
 import 'package:fintracker/widgets/currency.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
 
@@ -153,12 +152,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
               ),
-              SizedBox(
-                height: 190,
-                width: double.infinity,
-                child: AccountsSlider(accounts: _accounts,),
-              ),
-
+              AccountsSlider(accounts: _accounts,),
               const SizedBox(height: 15,),
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -210,7 +204,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       )
                                   ),
                                   const SizedBox(height: 5,),
-                                  CurrencyText(_income, style:  TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: ThemeColors.success, fontFamily: GoogleFonts.jetBrainsMono().fontFamily),)
+                                  CurrencyText(_income, style:  const TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: ThemeColors.success),)
                                 ],
                               ),
                             )
@@ -238,7 +232,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       )
                                   ),
                                   const SizedBox(height: 5,),
-                                  CurrencyText(_expense, style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: ThemeColors.error, fontFamily: GoogleFonts.jetBrainsMono().fontFamily),)
+                                  CurrencyText(_expense, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: ThemeColors.error),)
                                 ],
                               ),
                             )
