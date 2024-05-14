@@ -21,9 +21,9 @@ class App extends StatelessWidget {
                 useMaterial3: true,
                 brightness: MediaQuery.of(context).platformBrightness,
                 navigationBarTheme: NavigationBarThemeData(
-                  labelTextStyle: MaterialStateProperty.resolveWith((Set<MaterialState> states){
+                  labelTextStyle: WidgetStateProperty.resolveWith((Set<WidgetState> states){
                     TextStyle style =  const TextStyle(fontWeight: FontWeight.w500, fontSize: 11);
-                    if(states.contains(MaterialState.selected)){
+                    if(states.contains(WidgetState.selected)){
                       style = style.merge(const TextStyle(fontWeight: FontWeight.w600));
                     }
                     return style;
