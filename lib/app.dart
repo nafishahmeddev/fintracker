@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:month_year_picker/month_year_picker.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -22,9 +21,9 @@ class App extends StatelessWidget {
                 useMaterial3: true,
                 brightness: MediaQuery.of(context).platformBrightness,
                 navigationBarTheme: NavigationBarThemeData(
-                  labelTextStyle: MaterialStateProperty.resolveWith((Set<MaterialState> states){
+                  labelTextStyle: WidgetStateProperty.resolveWith((Set<WidgetState> states){
                     TextStyle style =  const TextStyle(fontWeight: FontWeight.w500, fontSize: 11);
-                    if(states.contains(MaterialState.selected)){
+                    if(states.contains(WidgetState.selected)){
                       style = style.merge(const TextStyle(fontWeight: FontWeight.w600));
                     }
                     return style;
@@ -35,7 +34,6 @@ class App extends StatelessWidget {
             localizationsDelegates: const [
               GlobalWidgetsLocalizations.delegate,
               GlobalMaterialLocalizations.delegate,
-              MonthYearPickerLocalizations.delegate,
             ],
           );
         }
