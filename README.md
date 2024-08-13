@@ -57,6 +57,9 @@ flutter run
 - Navigate to the "Categories" tab to manage your expense categories and budgets.
 - Set monthly budgets for each category by clicking on the category and entering the desired amount.
 
+## Roadmap
+Check out our detailed [roadmap](https://github.com/nafishahmeddev/fintracker/blob/master/roadmap.md) for planned features and updates!
+
 ## Contributing
 
 Contributions are welcome! If you find any issues or have suggestions for improvements, please open an issue or submit a pull request.
